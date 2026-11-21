@@ -445,14 +445,10 @@ function ContactFormSection() {
         setIsSubmitting(false)
       }
     } else {
-      // Local demo fallback when keys are pending setup
-      setTimeout(() => {
-        setIsSubmitting(false)
-        setSubmittedData({
-          ...formData,
-          isLiveSupabase: false,
-        })
-      }, 700)
+      setIsSubmitting(false)
+      setSubmissionError(
+        "Supabase is not configured in this environment. This inquiry was not saved."
+      )
     }
   }
 
@@ -801,7 +797,7 @@ function ContactFormSection() {
                   <p className="mt-3 text-center text-[11px] text-mist">
                     {isSupabaseConfigured
                       ? "🔒 Direct secure connection to Supabase database with Row Level Security."
-                      : "🔒 Form validation active. Connected to Supabase (pending publishable key in .env)."}
+                      : "🔒 Supabase is not configured. Form submissions will not be saved."}
                   </p>
                 </div>
               </form>
