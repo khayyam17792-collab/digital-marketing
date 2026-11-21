@@ -19,6 +19,7 @@ export const navLinks = [
   { label: "Services", to: "/services" },
   { label: "Our Work", to: "/work" },
   { label: "Contact", to: "/contact" },
+  { label: "Admin", to: "/admin/login" },
 ]
 
 export const services = [
