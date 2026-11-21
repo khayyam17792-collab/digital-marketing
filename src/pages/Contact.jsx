@@ -6,7 +6,6 @@ import {
   ChevronDown,
   Clock,
   ExternalLink,
-  Info,
   Mail,
   MapPin,
   MessageCircle,
@@ -36,7 +35,7 @@ const faqItems = [
     id: 2,
     question: "How can I start a project with your agency?",
     answer:
-      "Getting started is simple. Fill out our project inquiry form below with your goals and budget, or reach out directly via email or WhatsApp. We will schedule a discovery consultation within 24 business hours to map out your digital roadmap.",
+      "Fill out the project inquiry form below with your goals and budget. Include the best contact details for a follow-up.",
   },
   {
     id: 3,
@@ -116,11 +115,11 @@ function ContactHero() {
           <div className="mt-10 flex items-center gap-6 border-t border-white/10 pt-6">
             <div className="flex items-center gap-2">
               <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-              <p className="text-xs text-snow font-medium">Accepting New Projects</p>
+              <p className="text-xs text-snow font-medium">Project Inquiries Welcome</p>
             </div>
             <div className="h-4 w-px bg-white/10" />
             <p className="text-xs text-mist">
-              Direct Senior-Level Consultation
+              Share your goals through our inquiry form
             </p>
           </div>
         </motion.div>
@@ -143,47 +142,65 @@ function ContactHero() {
                 </div>
               </div>
               <span className="rounded-full bg-white/5 border border-white/10 px-2.5 py-1 text-[11px] font-semibold text-accent">
-                Fast Response
+                PROJECT INQUIRY
               </span>
             </div>
 
             <div className="mt-6 space-y-4">
-              <div className="rounded-2xl border border-white/5 bg-ink/70 p-4 transition hover:border-accent/40">
-                <p className="text-[11px] font-semibold tracking-wider text-accent uppercase">
-                  Primary Email
-                </p>
-                <p className="mt-1 font-display text-base font-bold text-snow">
-                  {brand.email}
-                </p>
-                <p className="mt-1 text-xs text-mist">
-                  Inquiries, proposals & partnerships
-                </p>
-              </div>
+              {brand.email && (
+                <div className="rounded-2xl border border-white/5 bg-ink/70 p-4 transition hover:border-accent/40">
+                  <p className="text-[11px] font-semibold tracking-wider text-accent uppercase">
+                    Primary Email
+                  </p>
+                  <p className="mt-1 font-display text-base font-bold text-snow">
+                    {brand.email}
+                  </p>
+                  <p className="mt-1 text-xs text-mist">
+                    Inquiries, proposals & partnerships
+                  </p>
+                </div>
+              )}
 
-              <div className="rounded-2xl border border-white/5 bg-ink/70 p-4 transition hover:border-accent/40">
-                <p className="text-[11px] font-semibold tracking-wider text-accent uppercase">
-                  Direct Phone / WhatsApp
-                </p>
-                <p className="mt-1 font-display text-base font-bold text-snow">
-                  {brand.phone}
-                </p>
-                <p className="mt-1 text-xs text-mist">
-                  Mon – Fri during standard business hours
-                </p>
-              </div>
+              {brand.phone && (
+                <div className="rounded-2xl border border-white/5 bg-ink/70 p-4 transition hover:border-accent/40">
+                  <p className="text-[11px] font-semibold tracking-wider text-accent uppercase">
+                    Direct Phone
+                  </p>
+                  <p className="mt-1 font-display text-base font-bold text-snow">
+                    {brand.phone}
+                  </p>
+                </div>
+              )}
+
+              {!brand.email && !brand.phone && (
+                <a
+                  href="#contact-form"
+                  className="block rounded-2xl border border-white/5 bg-ink/70 p-4 transition hover:border-accent/40"
+                >
+                  <p className="text-[11px] font-semibold tracking-wider text-accent uppercase">
+                    Contact ZENTRO
+                  </p>
+                  <p className="mt-1 font-display text-base font-bold text-snow">
+                    Use the project inquiry form
+                  </p>
+                  <p className="mt-1 text-xs text-mist">
+                    Share your goals and preferred contact details.
+                  </p>
+                </a>
+              )}
             </div>
 
-            <div className="mt-6 rounded-xl bg-violet/10 border border-violet/20 p-3.5 flex items-center justify-between text-xs">
-              <span className="text-mist">Quickest way to reach us:</span>
+            {brand.whatsappNumber && (
               <a
                 href={`https://wa.me/${brand.whatsappNumber.replace(/[^0-9]/g, "")}`}
                 target="_blank"
                 rel="noreferrer"
-                className="font-semibold text-accent hover:underline flex items-center gap-1"
+                className="mt-6 flex items-center justify-between rounded-xl border border-violet/20 bg-violet/10 p-3.5 text-xs font-semibold text-accent hover:underline"
               >
-                Chat on WhatsApp <ExternalLink className="size-3" />
+                <span>Chat on WhatsApp</span>
+                <ExternalLink className="size-3" />
               </a>
-            </div>
+            )}
           </div>
         </div>
       </Container>
@@ -194,9 +211,49 @@ function ContactHero() {
 // ─── 2. Contact Information Cards ─────────────────────────────────────────────
 
 function ContactInfoCards() {
-  const whatsappUrl = `https://wa.me/${brand.whatsappNumber.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
-    "Hello! I am interested in your digital marketing services.",
-  )}`
+  const contactMethods = [
+    brand.email
+      ? {
+          key: "email",
+          title: "EMAIL US",
+          description: "Send project inquiries by email.",
+          value: brand.email,
+          href: `mailto:${brand.email}`,
+          Icon: Mail,
+        }
+      : null,
+    brand.phone
+      ? {
+          key: "phone",
+          title: "CALL US",
+          description: "Speak with us about your project.",
+          value: brand.phone,
+          href: `tel:${brand.phone.replace(/[^0-9+]/g, "")}`,
+          Icon: Phone,
+        }
+      : null,
+    brand.whatsappNumber
+      ? {
+          key: "whatsapp",
+          title: "WHATSAPP",
+          description: "Message us about your project.",
+          value: brand.whatsappNumber,
+          href: `https://wa.me/${brand.whatsappNumber.replace(/[^0-9]/g, "")}`,
+          Icon: MessageCircle,
+        }
+      : null,
+    brand.location
+      ? {
+          key: "location",
+          title: "LOCATION",
+          description: "Our agency location.",
+          value: brand.location,
+          Icon: MapPin,
+        }
+      : null,
+  ].filter(Boolean)
+
+  if (contactMethods.length === 0) return null
 
   return (
     <section
@@ -209,119 +266,42 @@ function ContactInfoCards() {
             id="info-heading"
             eyebrow="COMMUNICATION CHANNELS"
             title="WE'RE HERE TO HELP YOUR BUSINESS GROW."
-            description="Whether you prefer an email inquiry, a phone discussion, or a quick WhatsApp chat, we are ready to connect."
+            description="Choose one of our verified contact channels."
           />
         </Reveal>
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Card 1: Email */}
-          <Reveal delay={0}>
-            <article className="group flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-panel/75 p-6 transition duration-300 hover:-translate-y-1 hover:border-accent/40 sm:p-7">
-              <div>
-                <span className="grid size-12 place-items-center rounded-2xl border border-white/10 bg-white/5 text-accent transition duration-300 group-hover:bg-violet group-hover:text-snow">
-                  <Mail className="size-5" />
-                </span>
-                <h3 className="mt-5 font-display text-xl font-bold text-snow">
-                  EMAIL US
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-mist">
-                  Have questions or project inquiries? Send us an email.
-                </p>
-              </div>
-              <div className="mt-6 border-t border-white/10 pt-4">
-                <a
-                  href={`mailto:${brand.email}`}
-                  className="font-medium text-sm text-snow hover:text-accent transition break-all"
-                >
-                  {brand.email}
-                </a>
-                <p className="mt-1 text-[11px] text-mist/60">
-                  (Editable placeholder)
-                </p>
-              </div>
-            </article>
-          </Reveal>
-
-          {/* Card 2: Call */}
-          <Reveal delay={0.06}>
-            <article className="group flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-panel/75 p-6 transition duration-300 hover:-translate-y-1 hover:border-accent/40 sm:p-7">
-              <div>
-                <span className="grid size-12 place-items-center rounded-2xl border border-white/10 bg-white/5 text-accent transition duration-300 group-hover:bg-violet group-hover:text-snow">
-                  <Phone className="size-5" />
-                </span>
-                <h3 className="mt-5 font-display text-xl font-bold text-snow">
-                  CALL US
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-mist">
-                  Speak with us about your business requirements.
-                </p>
-              </div>
-              <div className="mt-6 border-t border-white/10 pt-4">
-                <a
-                  href={`tel:${brand.phone.replace(/[^0-9+]/g, "")}`}
-                  className="font-medium text-sm text-snow hover:text-accent transition"
-                >
-                  {brand.phone}
-                </a>
-                <p className="mt-1 text-[11px] text-mist/60">
-                  (Editable placeholder)
-                </p>
-              </div>
-            </article>
-          </Reveal>
-
-          {/* Card 3: WhatsApp */}
-          <Reveal delay={0.12}>
-            <article className="group flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-panel/75 p-6 transition duration-300 hover:-translate-y-1 hover:border-emerald-500/40 sm:p-7">
-              <div>
-                <span className="grid size-12 place-items-center rounded-2xl border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 transition duration-300 group-hover:bg-emerald-500 group-hover:text-ink">
-                  <MessageCircle className="size-5" />
-                </span>
-                <h3 className="mt-5 font-display text-xl font-bold text-snow">
-                  WHATSAPP
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-mist">
-                  Connect with us directly through WhatsApp.
-                </p>
-              </div>
-              <div className="mt-6 border-t border-white/10 pt-4">
-                <Button
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full bg-emerald-600 hover:bg-emerald-500 text-ink text-xs font-bold py-2.5 shadow-none"
-                >
-                  CHAT ON WHATSAPP
-                </Button>
-                <p className="mt-1.5 text-center text-[10px] text-mist/60">
-                  Phone: {brand.whatsappNumber} (Placeholder)
-                </p>
-              </div>
-            </article>
-          </Reveal>
-
-          {/* Card 4: Location */}
-          <Reveal delay={0.18}>
-            <article className="group flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-panel/75 p-6 transition duration-300 hover:-translate-y-1 hover:border-accent/40 sm:p-7">
-              <div>
-                <span className="grid size-12 place-items-center rounded-2xl border border-white/10 bg-white/5 text-accent transition duration-300 group-hover:bg-violet group-hover:text-snow">
-                  <MapPin className="size-5" />
-                </span>
-                <h3 className="mt-5 font-display text-xl font-bold text-snow">
-                  LOCATION
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-mist">
-                  Find out where our agency is based.
-                </p>
-              </div>
-              <div className="mt-6 border-t border-white/10 pt-4">
-                <p className="font-medium text-sm text-snow">{brand.location}</p>
-                <p className="mt-1 text-[11px] text-mist/60">
-                  (Editable placeholder)
-                </p>
-              </div>
-            </article>
-          </Reveal>
+          {contactMethods.map(
+            ({ key, title, description, value, href, Icon }, index) => (
+              <Reveal key={key} delay={index * 0.06}>
+                <article className="group flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-panel/75 p-6 transition duration-300 hover:-translate-y-1 hover:border-accent/40 sm:p-7">
+                  <div>
+                    <span className="grid size-12 place-items-center rounded-2xl border border-white/10 bg-white/5 text-accent transition duration-300 group-hover:bg-violet group-hover:text-snow">
+                      <Icon className="size-5" aria-hidden="true" />
+                    </span>
+                    <h3 className="mt-5 font-display text-xl font-bold text-snow">
+                      {title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-mist">
+                      {description}
+                    </p>
+                  </div>
+                  <div className="mt-6 border-t border-white/10 pt-4">
+                    {href ? (
+                      <a
+                        href={href}
+                        className="break-all font-medium text-sm text-snow transition hover:text-accent"
+                      >
+                        {value}
+                      </a>
+                    ) : (
+                      <p className="font-medium text-sm text-snow">{value}</p>
+                    )}
+                  </div>
+                </article>
+              </Reveal>
+            ),
+          )}
         </div>
       </Container>
     </section>
@@ -516,49 +496,9 @@ function ContactFormSection() {
                   <p className="mt-2 text-sm leading-relaxed text-mist max-w-md mx-auto">
                     Thank you, <span className="text-snow font-semibold">{submittedData.fullName}</span>!{" "}
                     {submittedData.isLiveSupabase
-                      ? "Your inquiry has been stored securely in our database. Our team will review your goals and get in touch within 24 business hours."
+                      ? "Your inquiry has been stored for review by the ZENTRO team. We will follow up using the contact details you provided."
                       : "Your form submission was validated successfully on the frontend."}
                   </p>
-                </div>
-
-                {/* Status / Integration Details */}
-                <div className="rounded-2xl border border-white/10 bg-ink/70 p-4 text-left max-w-lg mx-auto text-xs space-y-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-accent font-semibold">
-                      <Info className="size-4 shrink-0" />
-                      <span>
-                        {submittedData.isLiveSupabase
-                          ? "Database Record Created"
-                          : "Supabase Setup Notice"}
-                      </span>
-                    </div>
-                    {submittedData.isLiveSupabase ? (
-                      <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-[10px] font-semibold text-emerald-400">
-                        LIVE SUPABASE
-                      </span>
-                    ) : (
-                      <span className="rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] font-semibold text-amber-400">
-                        PENDING API KEY
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-mist leading-relaxed">
-                    {submittedData.isLiveSupabase
-                      ? "Your inquiry was securely saved to the Supabase database. Our team will review your project details and follow up promptly."
-                      : "To store inquiries live in Supabase, configure VITE_SUPABASE_PUBLISHABLE_KEY or the legacy VITE_SUPABASE_ANON_KEY."}
-                  </p>
-                  <pre className="overflow-x-auto rounded-lg bg-black/50 p-2 font-mono text-[11px] text-accent/90">
-                    {JSON.stringify(
-                      {
-                        name: submittedData.fullName,
-                        email: submittedData.email,
-                        service: submittedData.serviceRequired,
-                        budget: submittedData.projectBudget || "Unspecified",
-                      },
-                      null,
-                      2,
-                    )}
-                  </pre>
                 </div>
 
                 <div className="pt-2">
@@ -800,7 +740,7 @@ function ContactFormSection() {
                   </Button>
                   <p className="mt-3 text-center text-[11px] text-mist">
                     {isSupabaseConfigured
-                      ? "🔒 Direct secure connection to Supabase database with Row Level Security."
+                      ? "Your inquiry is stored for review by authorized ZENTRO administrators. Please do not include passwords or sensitive information."
                       : "🔒 Supabase is not configured. Form submissions will not be saved."}
                   </p>
                 </div>
@@ -816,6 +756,8 @@ function ContactFormSection() {
 // ─── 4. Business Availability Section ─────────────────────────────────────────
 
 function BusinessAvailability() {
+  if (!brand.hours && !brand.responseTime) return null
+
   return (
     <section
       className="border-t border-white/10 bg-navy/40 py-20 sm:py-24"
@@ -834,34 +776,35 @@ function BusinessAvailability() {
               LET&apos;S TALK ABOUT YOUR NEXT BIG IDEA.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-mist">
-              We work closely with clients around the world. Whether you need an
-              introductory discovery session or a detailed quotation, our team
-              is on standby to respond promptly.
+              Submit a project inquiry to request a consultation or quotation.
+              Include the best contact details for a follow-up.
             </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl border border-white/10 bg-panel/70 p-6">
-              <span className="grid size-10 place-items-center rounded-xl bg-violet/20 text-accent">
-                <Clock className="size-5" />
-              </span>
-              <h3 className="mt-4 font-display text-base font-bold text-snow">
-                Business Hours
-              </h3>
-              <p className="mt-1 text-sm text-mist">{brand.hours}</p>
-              <p className="mt-2 text-[11px] text-mist/60">(Editable placeholder)</p>
-            </div>
+            {brand.hours && (
+              <div className="rounded-2xl border border-white/10 bg-panel/70 p-6">
+                <span className="grid size-10 place-items-center rounded-xl bg-violet/20 text-accent">
+                  <Clock className="size-5" />
+                </span>
+                <h3 className="mt-4 font-display text-base font-bold text-snow">
+                  Business Hours
+                </h3>
+                <p className="mt-1 text-sm text-mist">{brand.hours}</p>
+              </div>
+            )}
 
-            <div className="rounded-2xl border border-white/10 bg-panel/70 p-6">
-              <span className="grid size-10 place-items-center rounded-xl bg-violet/20 text-accent">
-                <Calendar className="size-5" />
-              </span>
-              <h3 className="mt-4 font-display text-base font-bold text-snow">
-                Expected Response
-              </h3>
-              <p className="mt-1 text-sm text-mist">{brand.responseTime}</p>
-              <p className="mt-2 text-[11px] text-mist/60">(Editable placeholder)</p>
-            </div>
+            {brand.responseTime && (
+              <div className="rounded-2xl border border-white/10 bg-panel/70 p-6">
+                <span className="grid size-10 place-items-center rounded-xl bg-violet/20 text-accent">
+                  <Calendar className="size-5" />
+                </span>
+                <h3 className="mt-4 font-display text-base font-bold text-snow">
+                  Expected Response
+                </h3>
+                <p className="mt-1 text-sm text-mist">{brand.responseTime}</p>
+              </div>
+            )}
           </div>
         </div>
       </Container>

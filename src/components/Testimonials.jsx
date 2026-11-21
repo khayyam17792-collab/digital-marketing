@@ -5,6 +5,8 @@ import Reveal from "./Reveal"
 import SectionHeading from "./SectionHeading"
 
 export default function Testimonials() {
+  if (testimonials.length === 0) return null
+
   return (
     <section className="py-20 sm:py-28" aria-labelledby="testimonials-heading">
       <Container>

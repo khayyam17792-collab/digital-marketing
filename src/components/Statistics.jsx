@@ -63,21 +63,23 @@ export default function Statistics() {
     return () => observer.disconnect()
   }, [])
 
+  if (stats.length === 0) return null
+
   return (
     <section className="border-y border-white/10 bg-navy/50 py-20 sm:py-24" aria-labelledby="stats-heading" ref={ref}>
       <Container>
         <div className="max-w-2xl">
           <p className="text-xs font-semibold tracking-[0.22em] text-accent">
-            PLACEHOLDER FIGURES
+            MEASURABLE GROWTH
           </p>
           <h2
             id="stats-heading"
             className="mt-4 font-display text-3xl font-bold tracking-tight text-snow sm:text-4xl"
           >
-            A snapshot for the layout.
+            Progress built around your goals.
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-mist sm:text-base">
-            These numbers are editable placeholders. They are not verified business results and should be replaced before launch.
+            We shape digital strategies around clear goals and agreed measures of progress.
           </p>
         </div>
         <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">

@@ -32,24 +32,26 @@ export default function Footer() {
             <span className="size-1.5 rounded-full bg-accent" />
             <span>{brand.tagline}</span>
           </div>
-          <ul className="mt-6 flex gap-2">
-            {socials.map((social) => {
-              const Icon = socialIcons[social.icon]
-              return (
-                <li key={social.label}>
-                  <a
-                    href={social.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`${social.label} (profile link placeholder)`}
-                    className="grid size-10 place-items-center rounded-full border border-white/10 text-mist transition duration-300 hover:border-white/25 hover:text-snow"
-                  >
-                    <Icon className="size-4" aria-hidden="true" />
-                  </a>
-                </li>
-              )
-            })}
-          </ul>
+          {socials.length > 0 && (
+            <ul className="mt-6 flex gap-2">
+              {socials.map((social) => {
+                const Icon = socialIcons[social.icon]
+                return (
+                  <li key={social.label}>
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={social.label}
+                      className="grid size-10 place-items-center rounded-full border border-white/10 text-mist transition duration-300 hover:border-white/25 hover:text-snow"
+                    >
+                      <Icon className="size-4" aria-hidden="true" />
+                    </a>
+                  </li>
+                )
+              })}
+            </ul>
+          )}
         </div>
 
         <div>
@@ -81,26 +83,36 @@ export default function Footer() {
         <div>
           <h2 className="text-sm font-semibold tracking-[0.16em] text-snow">CONTACT</h2>
           <ul className="mt-5 space-y-4 text-sm text-mist">
-            <li className="flex items-start gap-3">
-              <Mail className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
-              <a href={`mailto:${brand.email}`} className="hover:text-snow">
-                {brand.email}
-              </a>
-            </li>
-            <li className="flex items-start gap-3">
-              <Phone className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
-              <a href="tel:+000000000000" className="hover:text-snow">
-                {brand.phone}
-              </a>
-            </li>
-            <li className="flex items-start gap-3">
-              <MapPin className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
-              <span>{brand.location}</span>
-            </li>
+            {brand.email && (
+              <li className="flex items-start gap-3">
+                <Mail className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
+                <a href={`mailto:${brand.email}`} className="hover:text-snow">
+                  {brand.email}
+                </a>
+              </li>
+            )}
+            {brand.phone && (
+              <li className="flex items-start gap-3">
+                <Phone className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
+                <a href={`tel:${brand.phone.replace(/[^0-9+]/g, "")}`} className="hover:text-snow">
+                  {brand.phone}
+                </a>
+              </li>
+            )}
+            {brand.location && (
+              <li className="flex items-start gap-3">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
+                <span>{brand.location}</span>
+              </li>
+            )}
+            {!brand.email && !brand.phone && !brand.location && (
+              <li>
+                <Link to="/contact#contact-form" className="hover:text-snow">
+                  Use the project inquiry form
+                </Link>
+              </li>
+            )}
           </ul>
-          <p className="mt-4 text-xs leading-relaxed text-mist">
-            Email, phone, and location are placeholders.
-          </p>
         </div>
       </Container>
       <div className="border-t border-white/10">

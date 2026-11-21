@@ -11,7 +11,7 @@ const pageMetadata = {
   "/about": {
     title: `About Us — ${brand.name} | Digital Marketing Agency`,
     description:
-      "Learn about ZENTRO's story, mission, vision, and core values. We are your trusted digital growth partner, transforming ideas into measurable business results.",
+      "Learn about ZENTRO's digital services, mission, vision, and guiding principles.",
   },
   "/services": {
     title: `Our Services — ${brand.name} | Digital Marketing & Web Solutions`,
@@ -21,12 +21,12 @@ const pageMetadata = {
   "/work": {
     title: `Our Work & Portfolio — ${brand.name} | Creative Digital Showcase`,
     description:
-      "Explore ZENTRO's selected projects, case studies, and demonstration concepts across web development, social strategy, and brand identities.",
+      "Explore ZENTRO's clearly labeled demonstration concepts across web design, social strategy, and brand identity.",
   },
   "/contact": {
     title: `Contact Us — ${brand.name} | Start Your Project`,
     description:
-      "Connect with ZENTRO today. Discuss your business goals, request a customized proposal, or chat with our team on WhatsApp.",
+      "Submit a project inquiry to ZENTRO for digital marketing, branding, content, and web services.",
   },
 }
 

@@ -1,23 +1,37 @@
-# React + Vite
+# ZENTRO Digital Marketing Agency
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+The public website is a Vite + React single-page application. Vercel serves the app
+with the SPA rewrite in `vercel.json`.
 
-Currently, two official plugins are available:
+## Local development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```sh
+npm install
+cp .env.example .env
+npm run dev
+```
 
-## React Compiler
+Set `VITE_SUPABASE_URL` and either `VITE_SUPABASE_PUBLISHABLE_KEY` or the supported
+legacy `VITE_SUPABASE_ANON_KEY` in `.env` and in the Vercel project environment.
+These are public client credentials protected by Supabase Row Level Security. Never
+put a service-role key or WhatsApp/Meta secret in a `VITE_` variable.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Run the project checks with:
 
-## Expanding the Oxlint configuration
+```sh
+npm run lint
+npm run build
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
-# digital-marketing
+## Supabase and admin access
 
-## WhatsApp inquiry notifications
+The public contact form inserts inquiries into `public.inquiries`. RLS permits public
+submissions but restricts inquiry reads and management to authorized administrators.
+Create admin accounts in Supabase Auth, keep public sign-ups disabled, and authorize
+each account by adding its Auth user UUID to `public.zentro_admins`.
 
-Setup, Meta template requirements, Supabase secrets, and verification steps are documented in
-[supabase/WHATSAPP_SETUP.md](./supabase/WHATSAPP_SETUP.md). Meta credentials belong only in
-Supabase Edge Function Secrets and Vault, never in the Vite frontend.
+## WhatsApp notifications
+
+WhatsApp notifications require separate Meta and Supabase setup and are not enabled
+by the frontend configuration. Follow [the WhatsApp setup guide](./supabase/WHATSAPP_SETUP.md);
+keep all Meta tokens and worker secrets in Supabase Edge Function Secrets and Vault.

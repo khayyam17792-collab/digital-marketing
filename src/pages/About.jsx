@@ -14,7 +14,7 @@ import Container from "../components/Container"
 import Reveal from "../components/Reveal"
 import SectionHeading from "../components/SectionHeading"
 import SiteShell from "../components/SiteShell"
-import { brand, coreValues } from "../data/content"
+import { coreValues } from "../data/content"
 
 // ─── About Hero ──────────────────────────────────────────────────────────────
 
@@ -53,13 +53,12 @@ function AboutHero() {
             id="about-hero-heading"
             className="mt-5 font-display text-[2.6rem] font-bold leading-[0.98] tracking-tight text-snow sm:text-6xl lg:text-[4.15rem]"
           >
-            WE ARE MORE THAN JUST A DIGITAL AGENCY.
+            DIGITAL SERVICES BUILT AROUND YOUR BUSINESS GOALS.
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-mist sm:text-lg">
-            We are a team of strategists, creatives, and digital specialists
-            committed to helping businesses grow online. From brand identity to
-            paid campaigns, we build digital ecosystems that attract, engage,
-            and convert — turning online presence into measurable growth.
+            ZENTRO offers digital marketing, social media, SEO, website design,
+            branding, advertising, and content services. Explore what we do or
+            send a project inquiry to share your goals.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button to="/contact" icon>
@@ -71,138 +70,6 @@ function AboutHero() {
           </div>
         </motion.div>
 
-        <motion.div
-          className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-4"
-          initial={reduce ? false : { opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-        >
-          {[
-            { value: "5+", label: "Years of Experience" },
-            { value: "48+", label: "Projects Delivered" },
-            { value: "32+", label: "Happy Clients" },
-            { value: "7", label: "Digital Services" },
-          ].map((stat) => (
-            <div
-              key={stat.label}
-              className="rounded-2xl border border-white/10 bg-panel/70 px-5 py-5"
-            >
-              <p className="font-display text-3xl font-bold text-snow sm:text-4xl">
-                {stat.value}
-              </p>
-              <p className="mt-1 text-sm text-mist">{stat.label}</p>
-            </div>
-          ))}
-        </motion.div>
-      </Container>
-    </section>
-  )
-}
-
-// ─── Our Story ───────────────────────────────────────────────────────────────
-
-function OurStory() {
-  return (
-    <section
-      className="border-t border-white/10 py-20 sm:py-28"
-      aria-labelledby="story-heading"
-    >
-      <Container className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
-        <Reveal>
-          <p className="text-xs font-semibold tracking-[0.22em] text-accent">
-            OUR STORY
-          </p>
-          <h2
-            id="story-heading"
-            className="mt-4 font-display text-3xl font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-5xl"
-          >
-            WHERE IT ALL BEGAN.
-          </h2>
-          <div className="mt-6 space-y-4 text-base leading-relaxed text-mist">
-            <p>
-              {brand.name} was built out of a simple observation: too many good
-              businesses were being overlooked online — not because their
-              products or services weren&apos;t exceptional, but because their
-              digital presence wasn&apos;t communicating their value clearly.
-            </p>
-            <p>
-              We started with a belief that every business, regardless of size,
-              deserves access to strategic digital marketing that actually drives
-              results. So we built a team around that idea — people who
-              understand both the creative side of marketing and the analytical
-              thinking behind what makes campaigns perform.
-            </p>
-            <p>
-              Today, we work with businesses across industries to build their
-              digital presence from the ground up, grow their audience, and
-              convert attention into sustainable, long-term growth.
-            </p>
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.1}>
-          <div className="relative">
-            <div
-              className="pointer-events-none absolute -left-8 -top-8 h-48 w-48 rounded-full bg-violet/20 blur-2xl"
-              aria-hidden="true"
-            />
-            <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-navy p-6 sm:p-8">
-              <p className="mb-7 text-xs font-semibold tracking-[0.18em] text-accent">
-                OUR JOURNEY
-              </p>
-              <div className="space-y-6">
-                {[
-                  {
-                    year: "Year 01",
-                    label: "Agency Founded",
-                    detail:
-                      "Built our first client relationships and refined our strategic process.",
-                  },
-                  {
-                    year: "Year 02",
-                    label: "Team Expansion",
-                    detail:
-                      "Grew our team and broadened our service offering across new channels.",
-                  },
-                  {
-                    year: "Year 03",
-                    label: "50+ Projects",
-                    detail:
-                      "Surpassed 50 delivered projects across diverse industries and markets.",
-                  },
-                  {
-                    year: "Today",
-                    label: "Growing Together",
-                    detail:
-                      "Continuing to scale brands and deliver consistent, measurable results.",
-                  },
-                ].map((item, i, arr) => (
-                  <div key={item.year} className="flex gap-5">
-                    <div className="flex flex-col items-center">
-                      <div
-                        className={`size-3 shrink-0 rounded-full ${
-                          i === arr.length - 1 ? "bg-accent" : "bg-violet"
-                        }`}
-                      />
-                      {i < arr.length - 1 && (
-                        <div className="mt-2 w-px flex-1 bg-white/10" />
-                      )}
-                    </div>
-                    <div className="pb-2">
-                      <p className="text-[11px] font-semibold tracking-[0.16em] text-accent">
-                        {item.year}
-                      </p>
-                      <p className="mt-1 font-display text-base font-bold text-snow">
-                        {item.label}
-                      </p>
-                      <p className="mt-1 text-sm text-mist">{item.detail}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </Reveal>
       </Container>
     </section>
   )
@@ -340,7 +207,7 @@ const differentiators = [
   "Every strategy is built from scratch around your market, audience, and offer.",
   "We communicate clearly and consistently, so you're never in the dark.",
   "We focus on measurable outcomes, not just activity and impressions.",
-  "We bring senior-level thinking to every engagement, not junior execution.",
+  "We align strategy, creative work, and measurement around your goals.",
   "We stay ahead of digital trends so your brand always has an edge.",
 ]
 
@@ -444,7 +311,6 @@ export default function About() {
   return (
     <SiteShell>
       <AboutHero />
-      <OurStory />
       <MissionVision />
       <CoreValues />
       <WhyDifferent />

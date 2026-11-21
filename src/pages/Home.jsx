@@ -4,8 +4,6 @@ import Hero from "../components/Hero"
 import Portfolio from "../components/Portfolio"
 import Services from "../components/Services"
 import SiteShell from "../components/SiteShell"
-import Statistics from "../components/Statistics"
-import Testimonials from "../components/Testimonials"
 import WhyChooseUs from "../components/WhyChooseUs"
 
 export default function Home() {
@@ -16,8 +14,6 @@ export default function Home() {
       <Services />
       <Portfolio />
       <WhyChooseUs />
-      <Statistics />
-      <Testimonials />
       <CTA />
     </SiteShell>
   )

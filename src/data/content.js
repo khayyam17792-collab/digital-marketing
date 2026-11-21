@@ -5,12 +5,12 @@ export const brand = {
   positioning: "Helping businesses build their digital presence and achieve sustainable growth.",
   description:
     "We help businesses build their digital presence and achieve sustainable growth through creative digital marketing, strategic thinking, and innovative digital solutions.",
-  email: "hello@zentroagency.com",
-  phone: "+00 000 000 0000",
-  whatsappNumber: "+000000000000",
-  location: "City, Country",
-  hours: "Monday – Friday: 9:00 AM – 6:00 PM",
-  responseTime: "Within 24 business hours",
+  email: "",
+  phone: "",
+  whatsappNumber: "",
+  location: "",
+  hours: "",
+  responseTime: "",
 }
 
 export const navLinks = [
@@ -145,33 +145,9 @@ export const reasons = [
   },
 ]
 
-export const stats = [
-  { value: 48, label: "Projects Completed" },
-  { value: 32, label: "Happy Clients" },
-  { value: 7, label: "Digital Services" },
-  { value: 5, label: "Years of Experience" },
-]
+export const stats = []
 
-export const testimonials = [
-  {
-    name: "Client Name",
-    company: "Company Name",
-    quote:
-      "Sample quote. The process felt clear from the first call, and the work stayed focused on the goals we described.",
-  },
-  {
-    name: "Client Name",
-    company: "Company Name",
-    quote:
-      "Sample quote. Communication was straightforward, and the creative direction matched the way we wanted the brand to feel.",
-  },
-  {
-    name: "Client Name",
-    company: "Company Name",
-    quote:
-      "Sample quote. The team explained each step in plain language and shaped the work around our audience.",
-  },
-]
+export const testimonials = []
 
 export const coreValues = [
   {
@@ -206,9 +182,4 @@ export const coreValues = [
   },
 ]
 
-export const socials = [
-  { label: "Instagram", href: "https://www.instagram.com/", icon: "Instagram" },
-  { label: "Facebook", href: "https://www.facebook.com/", icon: "Facebook" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/", icon: "Linkedin" },
-  { label: "YouTube", href: "https://www.youtube.com/", icon: "Youtube" },
-]
+export const socials = []

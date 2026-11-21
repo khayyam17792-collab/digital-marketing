@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin
 
-Sitemap: https://zentroagency.com/sitemap.xml
+Sitemap: https://digital-marketing-xi-roan.vercel.app/sitemap.xml
