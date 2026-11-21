@@ -14,7 +14,7 @@ import {
   Send,
   Sparkles,
 } from "lucide-react"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import Button from "../components/Button"
 import Container from "../components/Container"
 import Reveal from "../components/Reveal"
@@ -366,6 +366,7 @@ function ContactFormSection() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submittedData, setSubmittedData] = useState(null)
   const [submissionError, setSubmissionError] = useState(null)
+  const submissionInProgress = useRef(false)
 
   const validate = () => {
     const errs = {}
@@ -401,54 +402,57 @@ function ContactFormSection() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (submissionInProgress.current) return
+
     const validationErrors = validate()
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors)
       return
     }
 
+    submissionInProgress.current = true
     setIsSubmitting(true)
     setSubmissionError(null)
 
-    // Check if Supabase client is configured with credentials
-    if (isSupabaseConfigured && supabase) {
-      try {
-        const { error } = await supabase
-          .from("inquiries")
-          .insert([
-            {
-              full_name: formData.fullName.trim(),
-              email: formData.email.trim(),
-              phone: formData.phone.trim() || null,
-              company_name: formData.companyName.trim() || null,
-              service_required: formData.serviceRequired,
-              project_budget: formData.projectBudget || null,
-              project_details: formData.projectDetails.trim(),
-              status: "new",
-            },
-          ])
-
-        if (error) {
-          throw error
-        }
-
-        setSubmittedData({
-          ...formData,
-          isLiveSupabase: true,
-        })
-      } catch (err) {
-        console.error("Supabase submission error:", err)
-        setSubmissionError(
-          err.message || "Unable to save inquiry to database. Please check your credentials or network."
-        )
-      } finally {
-        setIsSubmitting(false)
-      }
-    } else {
+    if (!isSupabaseConfigured || !supabase) {
       setIsSubmitting(false)
       setSubmissionError(
         "Supabase is not configured in this environment. This inquiry was not saved."
       )
+      submissionInProgress.current = false
+      return
+    }
+
+    try {
+      const { error } = await supabase.from("inquiries").insert([
+        {
+          full_name: formData.fullName.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim() || null,
+          company_name: formData.companyName.trim() || null,
+          service_required: formData.serviceRequired,
+          project_budget: formData.projectBudget || null,
+          project_details: formData.projectDetails.trim(),
+          status: "new",
+        },
+      ])
+
+      if (error) {
+        throw error
+      }
+
+      setSubmittedData({
+        ...formData,
+        isLiveSupabase: true,
+      })
+    } catch (err) {
+      console.error("Supabase submission error:", err)
+      setSubmissionError(
+        err.message || "Unable to save inquiry to database. Please check your credentials or network."
+      )
+    } finally {
+      submissionInProgress.current = false
+      setIsSubmitting(false)
     }
   }
 
@@ -541,7 +545,7 @@ function ContactFormSection() {
                   <p className="text-mist leading-relaxed">
                     {submittedData.isLiveSupabase
                       ? "Your inquiry was securely saved to the Supabase database. Our team will review your project details and follow up promptly."
-                      : "To store inquiries live in Supabase, add your Supabase Publishable/Anon key to .env (VITE_SUPABASE_ANON_KEY)."}
+                      : "To store inquiries live in Supabase, configure VITE_SUPABASE_PUBLISHABLE_KEY or the legacy VITE_SUPABASE_ANON_KEY."}
                   </p>
                   <pre className="overflow-x-auto rounded-lg bg-black/50 p-2 font-mono text-[11px] text-accent/90">
                     {JSON.stringify(

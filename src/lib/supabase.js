@@ -1,23 +1,27 @@
 import { createClient } from "@supabase/supabase-js"
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const supabaseKey =
+  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+  import.meta.env.VITE_SUPABASE_ANON_KEY
 
 /**
- * Checks if Supabase has been properly configured with valid keys.
+ * Checks if Supabase has been configured with a public client key.
  */
 export const isSupabaseConfigured = Boolean(
   supabaseUrl &&
-    supabaseAnonKey &&
-    supabaseAnonKey !== "your_anon_key_here" &&
-    supabaseAnonKey !== "your_supabase_anon_key_here" &&
+    supabaseKey &&
+    ![
+      "your_anon_key_here",
+      "your_supabase_anon_key_here",
+      "your_supabase_publishable_key_here",
+    ].includes(supabaseKey) &&
     supabaseUrl.startsWith("https://")
 )
 
 /**
- * Supabase client instance for frontend operations.
- * Uses only the public/anon key, safe for client-side usage with Row Level Security (RLS).
+ * Uses a Supabase publishable key or legacy anon key with Row Level Security.
  */
 export const supabase = isSupabaseConfigured
-  ? createClient(supabaseUrl, supabaseAnonKey)
+  ? createClient(supabaseUrl, supabaseKey)
   : null
