@@ -21,6 +21,7 @@ import Reveal from "../components/Reveal"
 import SectionHeading from "../components/SectionHeading"
 import SiteShell from "../components/SiteShell"
 import { brand } from "../data/content"
+import { isSupabaseConfigured, supabase } from "../lib/supabase"
 
 // ─── FAQ Dataset ─────────────────────────────────────────────────────────────
 
@@ -364,6 +365,7 @@ function ContactFormSection() {
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submittedData, setSubmittedData] = useState(null)
+  const [submissionError, setSubmissionError] = useState(null)
 
   const validate = () => {
     const errs = {}
@@ -392,9 +394,12 @@ function ContactFormSection() {
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: null }))
     }
+    if (submissionError) {
+      setSubmissionError(null)
+    }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const validationErrors = validate()
     if (Object.keys(validationErrors).length > 0) {
@@ -403,16 +408,57 @@ function ContactFormSection() {
     }
 
     setIsSubmitting(true)
+    setSubmissionError(null)
 
-    // Simulate clean dispatch without faking external email delivery
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setSubmittedData({ ...formData })
-    }, 800)
+    // Check if Supabase client is configured with credentials
+    if (isSupabaseConfigured && supabase) {
+      try {
+        const { error } = await supabase
+          .from("inquiries")
+          .insert([
+            {
+              full_name: formData.fullName.trim(),
+              email: formData.email.trim(),
+              phone: formData.phone.trim() || null,
+              company_name: formData.companyName.trim() || null,
+              service_required: formData.serviceRequired,
+              project_budget: formData.projectBudget || null,
+              project_details: formData.projectDetails.trim(),
+              status: "new",
+            },
+          ])
+
+        if (error) {
+          throw error
+        }
+
+        setSubmittedData({
+          ...formData,
+          isLiveSupabase: true,
+        })
+      } catch (err) {
+        console.error("Supabase submission error:", err)
+        setSubmissionError(
+          err.message || "Unable to save inquiry to database. Please check your credentials or network."
+        )
+      } finally {
+        setIsSubmitting(false)
+      }
+    } else {
+      // Local demo fallback when keys are pending setup
+      setTimeout(() => {
+        setIsSubmitting(false)
+        setSubmittedData({
+          ...formData,
+          isLiveSupabase: false,
+        })
+      }, 700)
+    }
   }
 
   const handleReset = () => {
     setSubmittedData(null)
+    setSubmissionError(null)
     setFormData({
       fullName: "",
       email: "",
@@ -463,22 +509,43 @@ function ContactFormSection() {
                 </div>
                 <div>
                   <h3 className="font-display text-2xl font-bold text-snow">
-                    Inquiry Captured (Demo Mode)
+                    {submittedData.isLiveSupabase
+                      ? "Inquiry Received Successfully!"
+                      : "Inquiry Captured (Demo Mode)"}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-mist max-w-md mx-auto">
-                    Thank you, <span className="text-snow font-semibold">{submittedData.fullName}</span>!
-                    Your form submission was validated successfully on the frontend.
+                    Thank you, <span className="text-snow font-semibold">{submittedData.fullName}</span>!{" "}
+                    {submittedData.isLiveSupabase
+                      ? "Your inquiry has been stored securely in our database. Our team will review your goals and get in touch within 24 business hours."
+                      : "Your form submission was validated successfully on the frontend."}
                   </p>
                 </div>
 
-                {/* Integration notice */}
+                {/* Status / Integration Details */}
                 <div className="rounded-2xl border border-white/10 bg-ink/70 p-4 text-left max-w-lg mx-auto text-xs space-y-2">
-                  <div className="flex items-center gap-2 text-accent font-semibold">
-                    <Info className="size-4 shrink-0" />
-                    <span>Developer Integration Note:</span>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-accent font-semibold">
+                      <Info className="size-4 shrink-0" />
+                      <span>
+                        {submittedData.isLiveSupabase
+                          ? "Database Record Created"
+                          : "Supabase Setup Notice"}
+                      </span>
+                    </div>
+                    {submittedData.isLiveSupabase ? (
+                      <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-[10px] font-semibold text-emerald-400">
+                        LIVE SUPABASE
+                      </span>
+                    ) : (
+                      <span className="rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] font-semibold text-amber-400">
+                        PENDING API KEY
+                      </span>
+                    )}
                   </div>
                   <p className="text-mist leading-relaxed">
-                    This form is ready for a real endpoint (e.g. Formspree, Resend, or your custom API). No mock emails were sent. Captured payload:
+                    {submittedData.isLiveSupabase
+                      ? "Your inquiry was securely saved to the Supabase database. Our team will review your project details and follow up promptly."
+                      : "To store inquiries live in Supabase, add your Supabase Publishable/Anon key to .env (VITE_SUPABASE_ANON_KEY)."}
                   </p>
                   <pre className="overflow-x-auto rounded-lg bg-black/50 p-2 font-mono text-[11px] text-accent/90">
                     {JSON.stringify(
@@ -502,6 +569,14 @@ function ContactFormSection() {
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} noValidate className="space-y-6">
+                {submissionError && (
+                  <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-left">
+                    <p className="flex items-center gap-2 text-xs font-semibold text-red-400">
+                      <AlertCircle className="size-4 shrink-0" />
+                      Submission Error: {submissionError}
+                    </p>
+                  </div>
+                )}
                 <div className="grid gap-6 sm:grid-cols-2">
                   {/* Full Name */}
                   <div>
@@ -724,7 +799,9 @@ function ContactFormSection() {
                     )}
                   </Button>
                   <p className="mt-3 text-center text-[11px] text-mist">
-                    🔒 Form is configured in demo mode. All fields validated. Ready for Formspree / API integration.
+                    {isSupabaseConfigured
+                      ? "🔒 Direct secure connection to Supabase database with Row Level Security."
+                      : "🔒 Form validation active. Connected to Supabase (pending publishable key in .env)."}
                   </p>
                 </div>
               </form>
