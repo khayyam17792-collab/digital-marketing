@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react"
 import { MotionConfig } from "framer-motion"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import ScrollToTop from "./components/ScrollToTop"
 import SEO from "./components/SEO"
 
@@ -9,6 +9,14 @@ const About = lazy(() => import("./pages/About"))
 const ServicesPage = lazy(() => import("./pages/Services"))
 const WorkPage = lazy(() => import("./pages/Work"))
 const ContactPage = lazy(() => import("./pages/Contact"))
+const AdminGuard = lazy(() => import("./components/admin/AdminGuard"))
+const AdminLayout = lazy(() => import("./components/admin/AdminLayout"))
+const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"))
+const AdminOverview = lazy(() => import("./pages/admin/AdminOverview"))
+const AdminInquiries = lazy(() => import("./pages/admin/AdminInquiries"))
+const AdminInquiryDetail = lazy(() => import("./pages/admin/AdminInquiryDetail"))
+const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"))
+const AdminNotifications = lazy(() => import("./pages/admin/AdminNotifications"))
 
 function PageLoadingFallback() {
   return (
@@ -36,6 +44,43 @@ export default function App() {
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/work" element={<WorkPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin" element={<AdminGuard />}>
+              <Route element={<AdminLayout />}>
+                <Route index element={<Navigate to="dashboard" replace />} />
+                <Route path="dashboard" element={<AdminOverview />} />
+                <Route path="inquiries" element={<AdminInquiries key="all" />} />
+                <Route
+                  path="inquiries/:id"
+                  element={<AdminInquiryDetail />}
+                />
+                <Route
+                  path="new"
+                  element={
+                    <AdminInquiries
+                      key="new"
+                      heading="New inquiries"
+                      description="Follow up on the latest requests from potential clients."
+                      defaultStatus="new"
+                    />
+                  }
+                />
+                <Route
+                  path="clients"
+                  element={
+                    <AdminInquiries
+                      key="clients"
+                      heading="Converted clients"
+                      description="Manage inquiries that have become ZENTRO clients."
+                      defaultStatus="converted"
+                    />
+                  }
+                />
+                <Route path="notifications" element={<AdminNotifications />} />
+                <Route path="settings" element={<AdminSettings />} />
+                <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
+              </Route>
+            </Route>
           </Routes>
         </Suspense>
       </BrowserRouter>
