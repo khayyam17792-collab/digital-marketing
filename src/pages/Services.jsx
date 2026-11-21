@@ -349,7 +349,7 @@ function ServicesHero() {
 
   return (
     <section
-      className="relative overflow-hidden pb-20 pt-14 sm:pt-20 lg:min-h-[calc(100svh-4.25rem)] lg:pb-28"
+      className="relative overflow-hidden pb-14 pt-12 sm:pb-20 sm:pt-20 lg:min-h-[calc(100svh-4.25rem)] lg:pb-28"
       aria-labelledby="services-hero-heading"
     >
       <div className="hero-grid pointer-events-none absolute inset-0" aria-hidden="true" />
@@ -358,7 +358,7 @@ function ServicesHero() {
         aria-hidden="true"
       />
 
-      <Container className="relative grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
+      <Container className="relative grid items-center gap-10 sm:gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -369,7 +369,7 @@ function ServicesHero() {
           </p>
           <h1
             id="services-hero-heading"
-            className="mt-5 max-w-xl font-display text-[2.5rem] font-bold leading-[0.98] tracking-tight text-snow sm:text-6xl lg:text-[3.9rem]"
+            className="mt-4 max-w-xl font-display text-[2.2rem] font-bold leading-[0.98] tracking-tight text-snow sm:mt-5 sm:text-6xl lg:text-[3.9rem]"
           >
             WE HELP YOUR BUSINESS GROW IN THE DIGITAL WORLD.
           </h1>
@@ -416,7 +416,7 @@ function ServicesOverview() {
   return (
     <section
       id="services-list"
-      className="border-t border-white/10 py-20 sm:py-28 scroll-mt-20"
+      className="scroll-mt-20 border-t border-white/10 py-14 sm:py-28"
       aria-labelledby="overview-heading"
     >
       <Container>
@@ -429,7 +429,7 @@ function ServicesOverview() {
           />
         </Reveal>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-10 grid gap-5 sm:mt-14 md:grid-cols-2 xl:grid-cols-3">
           {detailedServices.map((service, index) => {
             const Icon = service.icon
             const isFullWidthSpan = index === detailedServices.length - 1
@@ -527,7 +527,7 @@ function ServicesOverview() {
 function WorkProcess() {
   return (
     <section
-      className="border-t border-white/10 bg-navy/40 py-20 sm:py-28"
+      className="border-t border-white/10 bg-navy/40 py-14 sm:py-28"
       aria-labelledby="process-heading"
     >
       <Container>
@@ -540,7 +540,7 @@ function WorkProcess() {
           />
         </Reveal>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-5 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4">
           {processSteps.map((item, index) => {
             const Icon = item.icon
             return (
@@ -601,7 +601,7 @@ function WorkProcess() {
 function WhyChooseServices() {
   return (
     <section
-      className="border-t border-white/10 py-20 sm:py-28"
+      className="border-t border-white/10 py-14 sm:py-28"
       aria-labelledby="benefits-heading"
     >
       <Container>
@@ -614,7 +614,7 @@ function WhyChooseServices() {
           />
         </Reveal>
 
-        <div className="mt-14 grid gap-px overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-px overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/10 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
           {serviceBenefits.map((benefit, index) => {
             const Icon = benefit.icon
             return (
@@ -654,10 +654,10 @@ function ServicesCTA() {
   const reduce = useReducedMotion()
 
   return (
-    <section className="pb-20 sm:pb-28" aria-labelledby="services-cta-heading">
+    <section className="pb-14 sm:pb-28" aria-labelledby="services-cta-heading">
       <Container>
         <motion.div
-          className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-navy px-6 py-14 sm:px-12 sm:py-16 lg:px-16"
+          className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-navy px-5 py-10 sm:px-12 sm:py-16 lg:px-16"
           initial={reduce ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "0px 0px -10% 0px" }}
@@ -678,7 +678,7 @@ function ServicesCTA() {
             </p>
             <h2
               id="services-cta-heading"
-              className="mt-4 font-display text-3xl font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-5xl"
+              className="mt-4 font-display text-[1.75rem] font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-5xl"
             >
               LET&apos;S GROW YOUR BUSINESS TOGETHER.
             </h2>

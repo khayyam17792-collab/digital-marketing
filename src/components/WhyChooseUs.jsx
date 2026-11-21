@@ -22,7 +22,7 @@ const icons = {
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-20 sm:py-28" aria-labelledby="why-heading">
+    <section className="py-14 sm:py-28" aria-labelledby="why-heading">
       <Container>
         <Reveal>
           <SectionHeading id="why-heading" title="WHY PARTNER WITH US?" />

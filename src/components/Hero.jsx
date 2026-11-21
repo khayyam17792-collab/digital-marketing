@@ -120,9 +120,9 @@ export default function Hero() {
   const reduce = useReducedMotion()
 
   return (
-    <section className="relative overflow-hidden pb-20 pt-14 sm:pt-20 lg:min-h-[calc(100svh-4.25rem)] lg:pb-24">
+    <section className="relative overflow-hidden pb-14 pt-12 sm:pb-20 sm:pt-20 lg:min-h-[calc(100svh-4.25rem)] lg:pb-24">
       <div className="hero-grid pointer-events-none absolute inset-0" aria-hidden="true" />
-      <Container className="relative grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
+      <Container className="relative grid items-center gap-10 sm:gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -131,7 +131,7 @@ export default function Hero() {
           <p className="text-xs font-semibold tracking-[0.22em] text-accent">
             {brand.label}
           </p>
-          <h1 className="mt-5 max-w-xl font-display text-[2.6rem] font-bold leading-[0.98] tracking-tight text-snow sm:text-6xl lg:text-[4.15rem]">
+          <h1 className="mt-4 max-w-xl font-display text-[2.25rem] font-bold leading-[0.98] tracking-tight text-snow sm:mt-5 sm:text-6xl lg:text-[4.15rem]">
             WE TURN IDEAS INTO DIGITAL GROWTH.
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-mist sm:text-lg">

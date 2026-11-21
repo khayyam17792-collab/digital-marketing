@@ -16,12 +16,12 @@ export default function SectionHeading({
       ) : null}
       <h2
         id={id}
-        className="font-display text-3xl font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-[2.75rem]"
+        className="font-display text-[1.75rem] font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-[2.75rem]"
       >
         {title}
       </h2>
       {description ? (
-        <p className="mt-5 text-base leading-relaxed text-mist sm:text-lg">
+        <p className="mt-4 text-base leading-relaxed text-mist sm:mt-5 sm:text-lg">
           {description}
         </p>
       ) : null}

@@ -26,7 +26,7 @@ const icons = {
 
 export default function Services() {
   return (
-    <section className="py-20 sm:py-28" aria-labelledby="services-heading">
+    <section className="py-14 sm:py-28" aria-labelledby="services-heading">
       <Container>
         <Reveal>
           <SectionHeading
@@ -37,7 +37,7 @@ export default function Services() {
           />
         </Reveal>
 
-        <div className="mt-14 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:mt-14 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service, index) => {
             const Icon = icons[service.icon]
             const wide = index === services.length - 1

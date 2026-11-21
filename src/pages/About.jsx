@@ -23,7 +23,7 @@ function AboutHero() {
 
   return (
     <section
-      className="relative overflow-hidden pb-20 pt-14 sm:pt-20 lg:pb-28"
+      className="relative overflow-hidden pb-14 pt-12 sm:pb-20 sm:pt-20 lg:pb-28"
       aria-labelledby="about-hero-heading"
     >
       <div
@@ -51,7 +51,7 @@ function AboutHero() {
           </p>
           <h1
             id="about-hero-heading"
-            className="mt-5 font-display text-[2.6rem] font-bold leading-[0.98] tracking-tight text-snow sm:text-6xl lg:text-[4.15rem]"
+            className="mt-4 font-display text-[2.25rem] font-bold leading-[0.98] tracking-tight text-snow sm:mt-5 sm:text-6xl lg:text-[4.15rem]"
           >
             DIGITAL SERVICES BUILT AROUND YOUR BUSINESS GOALS.
           </h1>
@@ -79,7 +79,7 @@ function AboutHero() {
 
 function MissionVision() {
   return (
-    <section className="py-20 sm:py-28" aria-labelledby="mission-heading">
+    <section className="py-14 sm:py-28" aria-labelledby="mission-heading">
       <Container>
         <Reveal>
           <SectionHeading
@@ -153,7 +153,7 @@ const valueIcons = { Sparkles, Zap, Eye, Users, Target }
 function CoreValues() {
   return (
     <section
-      className="border-t border-white/10 py-20 sm:py-28"
+      className="border-t border-white/10 py-14 sm:py-28"
       aria-labelledby="values-heading"
     >
       <Container>
@@ -166,7 +166,7 @@ function CoreValues() {
           />
         </Reveal>
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
           {coreValues.map((value, index) => {
             const Icon = valueIcons[value.icon]
             const isLastOddOnSm =
@@ -213,15 +213,15 @@ const differentiators = [
 
 function WhyDifferent() {
   return (
-    <section className="py-20 sm:py-28" aria-labelledby="different-heading">
-      <Container className="grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
+    <section className="py-14 sm:py-28" aria-labelledby="different-heading">
+      <Container className="grid items-center gap-10 sm:gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
         <Reveal>
           <p className="text-xs font-semibold tracking-[0.22em] text-accent">
             WHY CHOOSE US
           </p>
           <h2
             id="different-heading"
-            className="mt-4 font-display text-3xl font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-5xl"
+            className="mt-4 font-display text-[1.75rem] font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-5xl"
           >
             WHAT MAKES US DIFFERENT.
           </h2>
@@ -259,12 +259,12 @@ function AboutCTA() {
 
   return (
     <section
-      className="pb-20 sm:pb-28"
+      className="pb-14 sm:pb-28"
       aria-labelledby="about-cta-heading"
     >
       <Container>
         <motion.div
-          className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-navy px-6 py-14 sm:px-12 sm:py-16 lg:px-16"
+          className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-navy px-5 py-10 sm:px-12 sm:py-16 lg:px-16"
           initial={reduce ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "0px 0px -10% 0px" }}
@@ -281,7 +281,7 @@ function AboutCTA() {
           <div className="relative max-w-2xl">
             <h2
               id="about-cta-heading"
-              className="font-display text-3xl font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-5xl"
+              className="font-display text-[1.75rem] font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-5xl"
             >
               LET&apos;S BUILD SOMETHING GREAT TOGETHER.
             </h2>

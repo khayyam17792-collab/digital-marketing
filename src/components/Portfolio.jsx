@@ -8,7 +8,7 @@ import SectionHeading from "./SectionHeading"
 
 export default function Portfolio() {
   return (
-    <section className="border-t border-white/10 py-20 sm:py-28" aria-labelledby="portfolio-heading">
+    <section className="border-t border-white/10 py-14 sm:py-28" aria-labelledby="portfolio-heading">
       <Container>
         <Reveal>
           <SectionHeading
@@ -22,7 +22,7 @@ export default function Portfolio() {
           </p>
         </Reveal>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2">
+        <div className="mt-10 grid gap-5 sm:mt-14 md:grid-cols-2">
           {projects.map((project, index) => (
             <Reveal key={project.title} delay={index % 2 === 0 ? 0 : 0.08}>
               <article className="group overflow-hidden rounded-[1.75rem] border border-white/10 bg-panel/60 transition duration-300 hover:-translate-y-1 hover:border-white/20">

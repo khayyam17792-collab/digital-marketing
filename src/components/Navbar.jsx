@@ -40,7 +40,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-ink/80 backdrop-blur-xl">
-      <Container className="flex h-[4.25rem] items-center justify-between gap-4">
+      <Container className="flex h-16 items-center justify-between gap-4 sm:h-[4.25rem]">
         <Logo />
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
           {navLinks.map((link) => (
@@ -50,7 +50,7 @@ export default function Navbar() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <Button to="/contact" className="hidden px-5 py-2.5 sm:inline-flex">
+          <Button to="/contact" className="!hidden px-5 py-2.5 sm:!inline-flex">
             Let's Talk
           </Button>
           <button
@@ -87,7 +87,7 @@ export default function Navbar() {
                 {link.label}
               </NavLink>
             ))}
-            <Button to="/contact" className="mt-3 sm:hidden">
+            <Button to="/contact" className="mt-3 sm:!hidden">
               Let's Talk
             </Button>
           </Container>

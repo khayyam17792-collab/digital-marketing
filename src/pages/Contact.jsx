@@ -70,7 +70,7 @@ function ContactHero() {
 
   return (
     <section
-      className="relative overflow-hidden pb-20 pt-14 sm:pt-20 lg:min-h-[calc(100svh-4.25rem)] lg:pb-28"
+      className="relative overflow-hidden pb-14 pt-12 sm:pb-20 sm:pt-20 lg:min-h-[calc(100svh-4.25rem)] lg:pb-28"
       aria-labelledby="contact-hero-heading"
     >
       <div className="hero-grid pointer-events-none absolute inset-0" aria-hidden="true" />
@@ -83,7 +83,7 @@ function ContactHero() {
         aria-hidden="true"
       />
 
-      <Container className="relative grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
+      <Container className="relative grid items-center gap-10 sm:gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -94,7 +94,7 @@ function ContactHero() {
           </p>
           <h1
             id="contact-hero-heading"
-            className="mt-5 max-w-xl font-display text-[2.5rem] font-bold leading-[0.98] tracking-tight text-snow sm:text-6xl lg:text-[4.15rem]"
+            className="mt-4 max-w-xl font-display text-[2.2rem] font-bold leading-[0.98] tracking-tight text-snow sm:mt-5 sm:text-6xl lg:text-[4.15rem]"
           >
             LET&apos;S BUILD SOMETHING GREAT TOGETHER.
           </h1>
@@ -257,7 +257,7 @@ function ContactInfoCards() {
 
   return (
     <section
-      className="border-t border-white/10 py-20 sm:py-28"
+      className="border-t border-white/10 py-14 sm:py-28"
       aria-labelledby="info-heading"
     >
       <Container>
@@ -270,7 +270,7 @@ function ContactInfoCards() {
           />
         </Reveal>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-5 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4">
           {contactMethods.map(
             ({ key, title, description, value, href, Icon }, index) => (
               <Reveal key={key} delay={index * 0.06}>
@@ -454,7 +454,7 @@ function ContactFormSection() {
   return (
     <section
       id="contact-form"
-      className="border-t border-white/10 py-20 sm:py-28 scroll-mt-20"
+      className="scroll-mt-20 border-t border-white/10 py-14 sm:py-28"
       aria-labelledby="form-heading"
     >
       <Container>
@@ -465,7 +465,7 @@ function ContactFormSection() {
             </p>
             <h2
               id="form-heading"
-              className="mt-4 font-display text-3xl font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-[2.75rem]"
+              className="mt-4 font-display text-[1.75rem] font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-[2.75rem]"
             >
               TELL US ABOUT YOUR PROJECT.
             </h2>
@@ -476,8 +476,8 @@ function ContactFormSection() {
           </div>
         </Reveal>
 
-        <div className="mx-auto mt-14 max-w-3xl">
-          <div className="rounded-[2rem] border border-white/10 bg-panel/80 p-6 sm:p-10 shadow-2xl backdrop-blur-md">
+        <div className="mx-auto mt-10 max-w-3xl sm:mt-14">
+          <div className="rounded-[2rem] border border-white/10 bg-panel/80 p-5 shadow-2xl backdrop-blur-md sm:p-10">
             {submittedData ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.96 }}
@@ -760,7 +760,7 @@ function BusinessAvailability() {
 
   return (
     <section
-      className="border-t border-white/10 bg-navy/40 py-20 sm:py-24"
+      className="border-t border-white/10 bg-navy/40 py-14 sm:py-24"
       aria-labelledby="availability-heading"
     >
       <Container>
@@ -771,7 +771,7 @@ function BusinessAvailability() {
             </p>
             <h2
               id="availability-heading"
-              className="mt-4 font-display text-3xl font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl"
+              className="mt-4 font-display text-[1.75rem] font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl"
             >
               LET&apos;S TALK ABOUT YOUR NEXT BIG IDEA.
             </h2>
@@ -823,7 +823,7 @@ function FAQSection() {
 
   return (
     <section
-      className="border-t border-white/10 py-20 sm:py-28"
+      className="border-t border-white/10 py-14 sm:py-28"
       aria-labelledby="faq-heading"
     >
       <Container>
@@ -836,7 +836,7 @@ function FAQSection() {
           />
         </Reveal>
 
-        <div className="mt-14 max-w-3xl space-y-4">
+        <div className="mt-10 max-w-3xl space-y-4 sm:mt-14">
           {faqItems.map((item) => {
             const isOpen = openId === item.id
 
@@ -892,10 +892,10 @@ function ContactFinalCTA() {
   const reduce = useReducedMotion()
 
   return (
-    <section className="pb-20 sm:pb-28" aria-labelledby="contact-cta-heading">
+    <section className="pb-14 sm:pb-28" aria-labelledby="contact-cta-heading">
       <Container>
         <motion.div
-          className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-navy px-6 py-14 sm:px-12 sm:py-16 lg:px-16"
+          className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-navy px-5 py-10 sm:px-12 sm:py-16 lg:px-16"
           initial={reduce ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "0px 0px -10% 0px" }}
@@ -916,7 +916,7 @@ function ContactFinalCTA() {
             </p>
             <h2
               id="contact-cta-heading"
-              className="mt-4 font-display text-3xl font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-5xl"
+              className="mt-4 font-display text-[1.75rem] font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-5xl"
             >
               YOUR NEXT BIG MOVE STARTS HERE.
             </h2>

@@ -398,7 +398,7 @@ function PortfolioHero() {
 
   return (
     <section
-      className="relative overflow-hidden pb-20 pt-14 sm:pt-20 lg:min-h-[calc(100svh-4.25rem)] lg:pb-28"
+      className="relative overflow-hidden pb-14 pt-12 sm:pb-20 sm:pt-20 lg:min-h-[calc(100svh-4.25rem)] lg:pb-28"
       aria-labelledby="portfolio-hero-heading"
     >
       <div className="hero-grid pointer-events-none absolute inset-0" aria-hidden="true" />
@@ -411,7 +411,7 @@ function PortfolioHero() {
         aria-hidden="true"
       />
 
-      <Container className="relative grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
+      <Container className="relative grid items-center gap-10 sm:gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -422,7 +422,7 @@ function PortfolioHero() {
           </p>
           <h1
             id="portfolio-hero-heading"
-            className="mt-5 max-w-xl font-display text-[2.5rem] font-bold leading-[0.98] tracking-tight text-snow sm:text-6xl lg:text-[4rem]"
+            className="mt-4 max-w-xl font-display text-[2.2rem] font-bold leading-[0.98] tracking-tight text-snow sm:mt-5 sm:text-6xl lg:text-[4rem]"
           >
             CREATIVE IDEAS. POWERFUL DIGITAL EXPERIENCES.
           </h1>
@@ -514,7 +514,7 @@ function PortfolioGallery() {
   return (
     <section
       id="projects-gallery"
-      className="border-t border-white/10 py-20 sm:py-28 scroll-mt-20"
+      className="scroll-mt-20 border-t border-white/10 py-14 sm:py-28"
       aria-labelledby="portfolio-gallery-heading"
     >
       <Container>
@@ -525,7 +525,7 @@ function PortfolioGallery() {
             </p>
             <h2
               id="portfolio-gallery-heading"
-              className="mt-4 font-display text-3xl font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-[2.75rem]"
+              className="mt-4 font-display text-[1.75rem] font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-[2.75rem]"
             >
               OUR WORK SPEAKS FOR OUR CREATIVITY.
             </h2>
@@ -538,7 +538,7 @@ function PortfolioGallery() {
         </Reveal>
 
         {/* ─── 3. Filter Buttons ────────────────────────────────────────── */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-2 sm:mt-12 sm:gap-3">
           {categories.map((cat) => {
             const isActive = activeCategory === cat
             return (
@@ -568,7 +568,7 @@ function PortfolioGallery() {
         {/* ─── 4. Project Grid ───────────────────────────────────────────── */}
         <motion.div
           layout
-          className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-2"
+          className="mt-10 grid gap-6 sm:mt-14 md:grid-cols-2 lg:grid-cols-2"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => {
@@ -592,7 +592,7 @@ function PortfolioGallery() {
                   </div>
 
                   {/* Project Details */}
-                  <div className="flex flex-1 flex-col justify-between p-6 sm:p-8">
+                  <div className="flex flex-1 flex-col justify-between p-5 sm:p-8">
                     <div>
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <span className="text-xs font-semibold tracking-[0.16em] text-accent uppercase">
@@ -655,10 +655,10 @@ function PortfolioCTA() {
   const reduce = useReducedMotion()
 
   return (
-    <section className="pb-20 sm:pb-28" aria-labelledby="portfolio-cta-heading">
+    <section className="pb-14 sm:pb-28" aria-labelledby="portfolio-cta-heading">
       <Container>
         <motion.div
-          className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-navy px-6 py-14 sm:px-12 sm:py-16 lg:px-16"
+          className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-navy px-5 py-10 sm:px-12 sm:py-16 lg:px-16"
           initial={reduce ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "0px 0px -10% 0px" }}
@@ -679,7 +679,7 @@ function PortfolioCTA() {
             </p>
             <h2
               id="portfolio-cta-heading"
-              className="mt-4 font-display text-3xl font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-5xl"
+              className="mt-4 font-display text-[1.75rem] font-bold leading-[1.05] tracking-tight text-snow sm:text-4xl lg:text-5xl"
             >
               READY TO BRING YOUR VISION TO LIFE?
             </h2>
